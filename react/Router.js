@@ -1,10 +1,10 @@
 function Router(items){
     const path = window.location.hash.slice(1);
-    let items = items.filter(it => it.path && it.component);
+    items = items.filter(it => it.path && it.component);
     let result;
     result = items.find(it => it.path === path);
-    if(result) return result;
-    return null;
+    if(result) return result.component;
+    return items[0].component;
 };
 
 export default Router;

@@ -1,4 +1,4 @@
-import render from './functions/render';
+import render from './functions/render.js';
 
 function Component(props){
     var props = {};
