@@ -1,6 +1,7 @@
 import renderer from './functions/renderer.js';
 
 class Component{
+    isRendered = false;
     props = {};
 
     constructor(props){
@@ -8,15 +9,20 @@ class Component{
     };
     
     display = function(newProps){
-        if(this.shouldUpdate(newProps)){
+        if(!this.isRendered){
+            //this.isRendered = true;
             return this.render();
+        }else{
+            if(this.shouldUpdate(newProps)){
+                return this.render();
+            }
         }
     };
 
     shouldUpdate = function(newProps){
-        let tmpProps = Object.create(props);
+        let tmpProps = Object.create(this.props);
         Object.assign(tmpProps, newProps);
-        if( JSON.stringify(tmpProps) !== JSON.stringify(props) ){
+        if( JSON.stringify(tmpProps) !== JSON.stringify(this.props) ){
           return true;
         }else{
             return false;

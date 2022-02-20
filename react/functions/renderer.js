@@ -1,5 +1,4 @@
 function renderer(elem){
-    //return this.toRender();
     if(!elem) return;
     let { type, props, children } = elem;
     let element = document.createElement(type);
@@ -9,20 +8,28 @@ function renderer(elem){
             element.setAttribute(key, value);
         }
     }
+
+    if(props){
+        for(const [key, value] of Object.entries(props)){
+            if(typeof value === 'function' && key.startsWith('on')){
+                let event = key.replace(/^on/, "").toLowerCase();
+                element.addEventListener( event, value);
+            }
+        }
+    }
+
     
     if(children){
         for(let child of children){
             let childElem = null;
             switch(typeof child){
                 case 'string':
-                    console.log('case 1')
+                case 'number':
                     childElem = document.createTextNode(child);
                     break;
                     
                 case 'object':
-                    console.log('case 2');
                     if(child.render !== undefined && typeof child.render === 'function'){
-                        console.log('yas')
                         childElem = child.render();
                     }else{
                         childElem = renderer(child);
@@ -30,19 +37,12 @@ function renderer(elem){
                     break;
 
                 case 'function': 
-                    console.log('case 3')
                     childElem = child.render();
             }
-            /*if(typeof child === 'string'){
-                childElem = document.createTextNode(child);
-            }else{
-                childElem = child.render();
-            }*/
             element.appendChild(childElem);
         }
     }
     return element;
-    return document.createTextNode('YO' + JSON.stringify(this.toRender));
 };
 
 export default renderer;

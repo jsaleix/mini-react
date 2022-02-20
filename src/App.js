@@ -1,5 +1,5 @@
 import AppRouter from "./AppRouter.js";
 
 export default function App(){
-    return AppRouter.render();
+    return AppRouter.display();
 }
