@@ -20,12 +20,17 @@ function renderer(elem){
                     break;
                     
                 case 'object':
-                    console.log('case 2')
-                    childElem = renderer(child);
+                    console.log('case 2');
+                    if(child.render !== undefined && typeof child.render === 'function'){
+                        console.log('yas')
+                        childElem = child.render();
+                    }else{
+                        childElem = renderer(child);
+                    }
                     break;
 
                 case 'function': 
-                console.log('case 3')
+                    console.log('case 3')
                     childElem = child.render();
             }
             /*if(typeof child === 'string'){

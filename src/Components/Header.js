@@ -12,8 +12,11 @@ class Header extends Component {
         return div;*/
         const div = createElement('div', 
         { attributes: {id: 'header'}},
-        createElement('p', null, 'Ca marche ?')
+        createElement('h1', null, 'SITE'),
+        createElement('a', { attributes: { href: '#home'}}, 'HOME' ),
+        createElement('a', { attributes: { href: '#page2'}}, 'page 2' )
         );
+        return div;
     };
   
   }
