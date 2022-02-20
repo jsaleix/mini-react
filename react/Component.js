@@ -1,15 +1,19 @@
-import render from './functions/render.js';
+import renderer from './functions/renderer.js';
 
-function Component(props){
-    var props = {};
+class Component{
+    props = {};
 
-    this.display = function(newProps){
+    constructor(props){
+        
+    };
+    
+    display = function(newProps){
         if(this.shouldUpdate(newProps)){
-            this.render();
+            return this.render();
         }
     };
 
-    this.shouldUpdate = function(newProps){
+    shouldUpdate = function(newProps){
         let tmpProps = Object.create(props);
         Object.assign(tmpProps, newProps);
         if( JSON.stringify(tmpProps) !== JSON.stringify(props) ){
@@ -19,8 +23,14 @@ function Component(props){
         }
     };
 
+    toRender = () => {};
+
+    render = () => {
+        return renderer(this.toRender());
+    }
+
 };
 
-Component.prototype.render = render;
+//Component.prototype.render = render;
 
 export default Component;

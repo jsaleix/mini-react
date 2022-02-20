@@ -1,4 +1,6 @@
-import {Router} from '../react/index.js';
+import createElement from '../react/functions/createElement.js';
+import {Router, Component} from '../react/index.js';
+import Header from './Components/Header.js';
 
 function Page1() {
     const data = JSON.parse(localStorage.getItem("tableData") || "{}");
@@ -46,22 +48,37 @@ function Page2() {
     return content;
 }
 
-export default function AppRouter() {
-    const div = document.createElement('div');
-    
-    const header = document.createTextNode('HEADER');
-    div.appendChild(header);
+class AppRouter extends Component {
+  constructor(){
+    super();
+  }
 
+  toRender = () => {
+    /*const div = document.createElement('div');
+  
+    
+    const header = Header.render();
+    div.appendChild(header);
+  
     let paths = [
         {path: 'home', component: Page1()},
-        {path: 'yo', component: Page2()}
+        {path: 'yo', component: Page2()},
     ];
     let res = Router(paths);
     console.log(res)
     div.appendChild(res);
-
+  
     const footer = document.createTextNode('FOOTER');
     div.appendChild(footer);
-
+  
+    return div;*/
+    const div = createElement('div', 
+    { attributes: {id: 'header'}},
+    createElement('p', null, 'Ca marche ?')
+    );
     return div;
+  };
+
 }
+
+export default new AppRouter();

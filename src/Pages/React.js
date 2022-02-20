@@ -1,9 +1,8 @@
 import { Component } from "../../react.js";
 
-class Home extends Component{
+class React extends Component{
     constructor(){
-        return this.render();
+        super();
     }
-
 
 }
