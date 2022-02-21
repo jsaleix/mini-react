@@ -18,6 +18,7 @@ class Header extends Component {
         'div', 
         null, 
         createElement('a', { attributes: { href: '#home'}}, 'HOME' ),
+        createElement('a', { attributes: { href: '#pokedex'}}, 'Pokedex' ),
         createElement('a', { attributes: { href: '#page2'}}, 'page 2' )
       );
 

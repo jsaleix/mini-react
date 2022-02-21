@@ -14,24 +14,28 @@ class Component{
 
     setState = newState => {
         let oldState = this.state;
-        this.state   = newState;
-        if(this.shouldUpdateState(oldState, newState)){
+        this.state   = {...oldState, ...newState};
+        if(this.shouldUpdateState(oldState, this.state)){
             this.rerender();
         }
     };
 
-    display = function(newProps){
-        if(!this.isRendered){
-            //this.isRendered = true;
+    display = (newProps) => {
+        if(!this.hasRendered){
+            this.hasRendered = true;
             return this.render();
         }else{
             if(this.shouldUpdate(newProps)){
+                console.log('should')
                 return this.render();
+            }else{
+                console.log('should not')
             }
         }
     };
 
     shouldUpdate = function(newProps){
+        if(!newProps)return true;
         let tmpProps = Object.create(this.props);
         Object.assign(tmpProps, newProps);
         if( JSON.stringify(tmpProps) !== JSON.stringify(this.props) ){
@@ -52,14 +56,19 @@ class Component{
     rerender = () => {
         if(this.node){
             this.node.replaceWith( this.render());
-        }
+        };
     };
+
+    componentDidMount = () => {};
 
     toRender = () => {};
 
     renderer = renderer;
 
     render = () => {
+        if(!this.hasRendered){
+            this.componentDidMount();
+        }
         return this.renderer(this.toRender());
     }
 
