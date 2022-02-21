@@ -29,3 +29,31 @@ html, body{
 #homepage{
     padding: 0 20%;
 }
+
+#pokedex{
+    padding: 0 20%;
+}
+
+#pokedex .pkm-content{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 14px;
+}
+
+#pokedex .pkm-item{
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 5em;
+    transition: .5s;
+    cursor: pointer;
+}
+
+#pokedex .pkm-item:hover{
+    transform: scale(1.1);
+}
+
+#pokedex .pkm-item img{
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+}
