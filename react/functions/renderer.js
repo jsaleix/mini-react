@@ -1,7 +1,12 @@
 function renderer(elem){
     if(!elem) return;
+
     let { type, props, children } = elem;
     let element = document.createElement(type);
+
+    if(this !== undefined){
+        this.node = element;
+    }
 
     if(props?.attributes){
         for (const [key, value] of Object.entries(props.attributes)) {

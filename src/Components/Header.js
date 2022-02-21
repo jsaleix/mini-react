@@ -8,8 +8,9 @@ class Header extends Component {
     }
   
     maFn = () =>{
-        alert('clicked')
+        //alert('clicked');
         this.test = this.test+1;
+        this.rerender();
     };
 
     toRender = () => {

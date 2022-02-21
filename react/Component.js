@@ -3,11 +3,14 @@ import renderer from './functions/renderer.js';
 class Component{
     isRendered = false;
     props = {};
+    node = null;
 
     constructor(props){
         
     };
     
+    setNode = node => this.node = node;
+
     display = function(newProps){
         if(!this.isRendered){
             //this.isRendered = true;
@@ -29,10 +32,19 @@ class Component{
         }
     };
 
+    rerender = () => {
+        if(this.node){
+            console.log(this.node.parentNode);
+            this.node.replaceWith( this.render());
+        }
+    };
+
     toRender = () => {};
 
+    renderer = renderer;
+
     render = () => {
-        return renderer(this.toRender());
+        return this.renderer(this.toRender());
     }
 
 };
