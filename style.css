@@ -4,17 +4,23 @@ html, body{
 }
 
 #header{
-    padding: 0 20%;
-    border: 1px solid red;
+    padding: 20px 20%;
+    background-color: #20232a;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: white;
 }
 
 #header a{
     text-decoration: none;
     margin-right: 10px;
-    color: black;
+    color: white;
+}
+
+#header img{
+    width: 60px;
+    object-fit: cover;
 }
 
 #footer{

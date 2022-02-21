@@ -1,7 +1,7 @@
 import renderer from './functions/renderer.js';
 
 class Component{
-    isRendered = false;
+    hasRendered = false;
     props = {};
     state = {};
     node = null;

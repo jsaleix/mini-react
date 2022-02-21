@@ -3,7 +3,7 @@ import { Component, CreateElement } from '../../react/index.js';
 class Home extends Component {
     constructor(props){
       super(props);
-      this.state = { counter: 1 }
+      this.state = { counter: 0 }
     }
   
     incCounter = (e) =>{

@@ -4,26 +4,33 @@ import PkmItem from '../Components/PkmItem.js';
 class Pokedex extends Component {
   constructor(props){
     super(props);
-    this.state = { pkms: [], test: 1 }
+    this.state = { 
+      pkms: [], 
+      test: 1,
+      limit: 6
+    }
   }
 
   fetchPkm = async () => {
-    let res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=6&offset=389')
+    let { limit } = this.state;
+    console.log('fetch pkm');
+
+    let res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=389`)
                 .then( res => res.json())
                 .catch(e => console.error(e));
     if(res?.results){
       let tmpList = [];
-      res.results.forEach.call(res.results, pkm => {
-          let idPkm = (pkm.url).split("https://");
-          idPkm     = (idPkm[1]).split("/")[4];
-          let newPkm = {name: pkm.name, id: idPkm}
-          tmpList.push(newPkm);
+      tmpList = res.results.map( pkm => {
+        let idPkm = (pkm.url).split("https://");
+        idPkm     = (idPkm[1]).split("/")[4];
+        return {name: pkm.name, id: idPkm}
       });
+      console.log(tmpList)
       this.setState({ pkms: tmpList });
     }
   };
 
-  pkmItem = () => {
+  results = () => {
     if(this.state.pkms){
       let pkms = this.state.pkms.map( p => new PkmItem({pkm: p}) );
       let main = CreateElement('div', { attributes: { class: 'pkm-content'}}, ...pkms);
@@ -44,7 +51,8 @@ class Pokedex extends Component {
       'div', 
       { attributes: {id: 'pokedex'}},
       CreateElement('h1', {'onclick': this.updateTest}, 'Pokedex'),
-      this.pkmItem()
+      this.results(),
+      CreateElement('button', {onclick: () => this.setState({ limit: this.state.limit+6})}, 'More' )
     );
     return home;
   };
