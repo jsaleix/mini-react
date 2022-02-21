@@ -3,13 +3,22 @@ import renderer from './functions/renderer.js';
 class Component{
     isRendered = false;
     props = {};
+    state = {};
     node = null;
 
     constructor(props){
-        
+        this.props=props;
     };
     
     setNode = node => this.node = node;
+
+    setState = newState => {
+        let oldState = this.state;
+        this.state   = newState;
+        if(this.shouldUpdateState(oldState, newState)){
+            this.rerender();
+        }
+    };
 
     display = function(newProps){
         if(!this.isRendered){
@@ -26,7 +35,15 @@ class Component{
         let tmpProps = Object.create(this.props);
         Object.assign(tmpProps, newProps);
         if( JSON.stringify(tmpProps) !== JSON.stringify(this.props) ){
-          return true;
+            return true;
+        }else{
+            return false;
+        }
+    };
+
+    shouldUpdateState = function(oldState, newState){
+        if( JSON.stringify(oldState) !== JSON.stringify(newState) ){
+            return true;
         }else{
             return false;
         }
@@ -34,7 +51,6 @@ class Component{
 
     rerender = () => {
         if(this.node){
-            console.log(this.node.parentNode);
             this.node.replaceWith( this.render());
         }
     };

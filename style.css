@@ -1,0 +1,31 @@
+html, body{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+#header{
+    padding: 0 20%;
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#header a{
+    text-decoration: none;
+    margin-right: 10px;
+    color: black;
+}
+
+#footer{
+    padding: 0 20%;
+    border-top: 1px solid gray;
+}
+
+#footer h3{
+    font-size: 12px;
+}
+
+#homepage{
+    padding: 0 20%;
+}
