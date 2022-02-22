@@ -5,6 +5,7 @@ class Component{
     props = {};
     state = {};
     node = null;
+    useEffects = {};
 
     constructor(props){
         this.props=props;
@@ -18,18 +19,18 @@ class Component{
         if(this.shouldUpdateState(oldState, this.state)){
             this.rerender();
         }
+        
+        if(Object.keys(this.useEffects).length > 0 ){
+            this.checkUseEffects(oldState);
+        }
     };
 
     display = (newProps) => {
         if(!this.hasRendered){
-            this.hasRendered = true;
             return this.render();
         }else{
             if(this.shouldUpdate(newProps)){
-                console.log('should')
                 return this.render();
-            }else{
-                console.log('should not')
             }
         }
     };
@@ -59,21 +60,49 @@ class Component{
         };
     };
 
-    componentDidMount = () => {};
+    /*
+    *   this.useEffects format:
+    *   this.useEffects = {
+    *       "this.state.myDependency": [ fn1, fn2, fn3...]
+    *   }
+    */
+    useEffect = (fn, dependencies) => {
+        for(let dependency of dependencies){
+            dependency = dependency.replace('this.state.', "");
+            let dependencyFns = this.useEffects[dependency] || [];
+            dependencyFns = [...dependencyFns, fn];
+            this.useEffects = { ...this.useEffects, [dependency]: dependencyFns }
+        }
+    };
 
-    toRender = () => {};
+    checkUseEffects = (oldState) => {
+        for (const [key, value] of Object.entries(this.useEffects)) {
+            if(oldState[key] !== this.state[key]){
+                for(let fn of value){
+                    fn();
+                }
+            }
+        }
+    }
+
+    componentDidMount = () => {}; // Called once when the component is created
+
+    componentDidUpdate = () => {}; //Called each time the state is updated
+
+    toRender = () => {}; // What the component must render
 
     renderer = renderer;
 
     render = () => {
         if(!this.hasRendered){
+            this.hasRendered = true;
             this.componentDidMount();
+        }else{
+            this.componentDidUpdate();
         }
         return this.renderer(this.toRender());
     }
 
 };
-
-//Component.prototype.render = render;
 
 export default Component;
