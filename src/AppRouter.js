@@ -20,7 +20,7 @@ class AppRouter extends Component {
     ];
 
     const div = createElement('div', 
-      { attributes: {id: 'main'}},
+      { id: 'main' },
       Header,
       Router(paths),
       Footer

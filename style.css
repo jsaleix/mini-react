@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
 html, body{
     box-sizing: border-box;
     margin: 0;
+    font-family: 'Raleway', sans-serif;
 }
 
 #header{
@@ -33,7 +36,52 @@ html, body{
 }
 
 #homepage{
+    /*padding: 0 20%;*/
+    position: relative;
+}
+
+#homepage #counter{
     padding: 0 20%;
+    z-index: 20;
+}
+
+
+#homepage .part-1 div{
+    width: 100%;
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10% 0;
+    overflow: hidden;
+    position: relative;
+}
+
+#homepage .part-1 div::before{
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjZmZmIi8+CiAgPGcgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K);
+    background-repeat: no-repeat;
+    background-position: 100% 100px;
+    background-size: 50% auto;
+    opacity: 0.05;
+    overflow: hidden;
+}
+
+
+#homepage .part-1 div h2{
+    color: #61dafb;
+    margin: 0;
+    font-size: 68px;
+}
+
+#homepage .part-1 div p{
+    margin: 0;
+    color: white;
 }
 
 #pokedex{

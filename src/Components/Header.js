@@ -9,8 +9,8 @@ class Header extends Component {
     }
 
     logo = () => {
-      const img = createElement('img', {attributes: {src: REACT_LOGO}});
-      const a = CreateElement('a', { attributes: {'href': '#home'}}, img);
+      const img = createElement('img', {src: REACT_LOGO});
+      const a = CreateElement('a', { 'href': '#home'}, img);
       return a;
     };
 
@@ -19,14 +19,14 @@ class Header extends Component {
       const li = createElement(
         'div', 
         null, 
-        createElement('a', { attributes: { href: '#home'}}, 'HOME' ),
-        createElement('a', { attributes: { href: '#pokedex'}}, 'Pokedex' ),
-        createElement('a', { attributes: { href: '#page2'}}, 'page 2' )
+        createElement('a', { href: '#home'}, 'HOME' ),
+        createElement('a', { href: '#pokedex'}, 'Pokedex' ),
+        createElement('a', { href: '#page2'}, 'page 2' )
       );
 
       const header = createElement(
         'div', 
-        { attributes: {id: 'header'}},
+        { id: 'header'},
         this.logo(),
         li
       );

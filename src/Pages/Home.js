@@ -14,14 +14,21 @@ class Home extends Component {
       const counterDiv = CreateElement('p', null, 'You clicked ' + this.state.counter + ' times');
       const clicker = CreateElement('button', { 'onClick': this.incCounter}, 'Click');
 
-      return CreateElement( 'div', { attributes: {id: 'counter'}}, counterDiv, clicker);
+      return CreateElement( 'div', { id: 'counter' }, counterDiv, clicker);
     }
+
+    part1 = () => {
+      const title = CreateElement('h2', null, 'React');
+      const subTitle = CreateElement('p', null, 'A JavaScript library for building user interfaces');
+      const container = CreateElement('div', null,title, subTitle)
+      return CreateElement('div', {class: 'part-1'}, container);
+    };
 
     toRender = () => {
       const home = CreateElement(
         'div', 
-        { attributes: {id: 'homepage'}},
-        CreateElement('h1', null, 'Welcome'),
+        { id: 'homepage' },
+        this.part1(),
         this.counterDiv()
       );
       return home;

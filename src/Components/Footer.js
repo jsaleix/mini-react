@@ -10,7 +10,7 @@ class Footer extends Component {
       let copyright = createElement('h3', null, '© All rights reserved');
 
       const div = createElement('div', 
-        { attributes: {id: 'footer'}},
+        { id: 'footer'} ,
         copyright
       );
       return div;

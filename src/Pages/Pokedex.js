@@ -8,7 +8,8 @@ class Pokedex extends Component {
       pkms: [], 
       test: 1,
       limit: 6,
-      loading: true
+      loading: true,
+      selected: null
     }
   }
 
@@ -16,7 +17,7 @@ class Pokedex extends Component {
     let { limit } = this.state;
     this.setState({ loading: true });
 
-    let res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=389`)
+    let res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=386`)
                 .then( res => res.json())
                 .catch(e => console.error(e));
     if(res?.results){
@@ -35,8 +36,8 @@ class Pokedex extends Component {
 
   results = () => {
     if(this.state.pkms){
-      let pkms = this.state.pkms.map( p => new PkmItem({pkm: p}) );
-      let main = CreateElement('div', { attributes: { class: 'pkm-content'}}, ...pkms);
+      let pkms = this.state.pkms.map( p => new PkmItem({pkm: p, selected: this.state.selected, select: (item) => this.setState({ selected: item})}) );
+      let main = CreateElement('div', { class: 'pkm-content' }, ...pkms);
       return main;
     }
   };
@@ -52,7 +53,6 @@ class Pokedex extends Component {
     this.useEffect(async() => {
         await this.fetchPkm();
     }, ['this.state.limit']);
-
   };
 
   updateTest = () => {
@@ -68,7 +68,7 @@ class Pokedex extends Component {
 
     const home = CreateElement(
       'div', 
-      { attributes: {id: 'pokedex'}},
+      { id: 'pokedex' },
       CreateElement('h1', {'onclick': this.updateTest}, 'Pokedex'),
       this.results(),
       this.moreBtn()
