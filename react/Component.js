@@ -1,4 +1,6 @@
 import renderer from './functions/renderer.js';
+import prop_access from './functions/prop_access.js';
+import string_interpolate from './functions/string_interpolate.js';
 
 class Component{
     hasRendered = false;

@@ -22,7 +22,7 @@ class PkmItem extends Component {
     toRender = () => {
         if(!this.props.pkm) return;
         const img = CreateElement('img', {src: this.getImg()});
-        const name = CreateElement('h3', null, this?.props?.pkm?.name);
+        const name = CreateElement('h3', null, "{{ this.props.pkm.name }}".interpolate(this));
 
         const div = CreateElement('div', 
                     {
