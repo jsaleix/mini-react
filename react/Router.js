@@ -3,27 +3,32 @@ let navProps = {
     currentUri: null
 };
 
-/*function getPathWithParam(items, path){
-    let checkItemsWithParams = items.filter(item => item.path.indexOf(':') !== -1 );
-    if(checkItemsWithParams.length < 1) return null;
-
-    let currPathLen = path.split('/').length;
-    let itemsLength = checkItemsWithParams.filter( item => item.path.split('/').length === currPathLen );
-    console.log(itemsLength);
-}*/
-
+function getRightItem(items, path){
+    try{
+        let result = items.find(it => path.startsWith(it.path));
+        while(result?.exact && result.path !== path){
+            items = items.filter(i => it.path !== result.path );
+            result = items.find(it => it.path.startsWith(path));
+        }
+        if( !result?.exact && result.path !== path){
+            let extraUri = path.substr(result.path.length, path.length - result.path.length);
+            navProps.params.extraUri = extraUri;
+        }
+        return result;
+    }catch(e){
+        console.error(e);
+        return null;
+    }
+    
+}
+ 
 function Router(items){
     navProps.currentUri = window.location.hash;
     const path = window.location.hash.slice(1);
-
+    
     items = items.filter(it => it.path && it.component);
     let result;
-    result = items.find(it => it.path === path);
-
-    /*if(!result){
-        //Checking using params
-        result = getPathWithParam(items, path);
-    }*/
+    result = getRightItem(items, path);
 
     if(result){
         if(typeof result.component === 'function'){
@@ -32,7 +37,6 @@ function Router(items){
             return result.component;
         }
     }
-
 
     return new (items[0].component)(navProps);
 };

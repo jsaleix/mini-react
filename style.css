@@ -111,3 +111,7 @@ html, body{
     height: 300px;
     object-fit: contain;
 }
+
+.container{
+    padding: 0 20%;
+}

@@ -7,7 +7,7 @@ class Footer extends Component {
     }
   
     toRender = () => {
-      let copyright = createElement('h3', null, '© All rights reserved');
+      let copyright = createElement('h3', null, '© MINI-REACT');
 
       const div = createElement('div', 
         { id: 'footer'} ,

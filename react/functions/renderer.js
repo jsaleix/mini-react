@@ -46,7 +46,8 @@ function renderer(elem){
                 case 'function': 
                     childElem = child.render();
             }
-            element.appendChild(childElem);
+            
+            if(childElem) element.appendChild(childElem);
         }
     }
     return element;
