@@ -30,7 +30,11 @@ class PkmItem extends Component {
                         style: this.props.selected === this.props.pkm.id && 'border: 1px solid red',
                         onclick: this.select
                     }, 
-                    img, name);
+                    img,
+                    name,
+                    (this.props.selected === this.props.pkm.id) &&
+                    CreateElement('button', { onClick: () => window.location.href = (`#pkm/${this.props.pkm.id}`)}, 'Visit')
+        );
         return div;
     }
 
