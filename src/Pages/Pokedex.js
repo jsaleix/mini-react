@@ -4,6 +4,7 @@ import PkmItem from '../Components/PkmItem.js';
 class Pokedex extends Component {
   constructor(props){
     super(props);
+    console.log(props)
     this.state = { 
       pkms: [], 
       test: 1,
@@ -78,4 +79,4 @@ class Pokedex extends Component {
   
   }
   
-  export default new Pokedex();
+  export default Pokedex;

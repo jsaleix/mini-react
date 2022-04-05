@@ -4,6 +4,7 @@ import Header from './Components/Header.js';
 import Footer from './Components/Footer.js';
 import Home from './Pages/Home.js';
 import Pokedex from './Pages/Pokedex.js';
+import PkmPage from './Pages/PkmPage.js';
 
 class AppRouter extends Component {
   constructor(){
@@ -16,7 +17,9 @@ class AppRouter extends Component {
       {path: 'home', component: Home},
       {path: 'pokedex', component: Pokedex},
       {path: 'page1', component: createElement('div', null, 'Welcome')},
-      {path: 'page2', component: createElement('div', null, 'page2')}
+      {path: 'page2', component: createElement('div', null, 'page2')},
+      {path: 'pkm/:id', component: PkmPage }
+
     ];
 
     const div = createElement('div', 
